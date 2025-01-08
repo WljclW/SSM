@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.EmpParamMapper">
+
+    <!--
+        如果参数只有一个的话，获取对象的属性值不需要通过"对象.字段名"的方式，直接在#{}内填写字段名即可
+    -->
+    <insert id="addEmploy">
+        insert into t_emp(emp_name,age) values (#{empName},#{age})
+    </insert>
+
+    <insert id="addEmploy2">
+        insert into t_emp(emp_name,age) values (#{empName},#{age})
+    </insert>
+
+    <select id="getEmploy" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where id = #{abc}
+    </select>
+
+    <select id="getEmploy02" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where id = #{ids[1]}
+    </select>
+    <select id="getEmployByIdAndName" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where id = #{id} and emp_name = #{empName}
+    </select>
+
+<!--
+    对于多参数建议：
+        在Mapper接口的方法的形参中添加@Param指定参数名；然后在xml文件SQL语句中的"#{}"内填写@Param指
+        定的参数名即可；
+    解释：#{id}表示拿到参数id的值；#{m.name}表示拿到参数m(一个hashmap)的name属性的值；#{ids[1]}表示拿到参数ids列表
+         的第二个元素；#{e.empSalary}表示拿到参数e的empSalary属性的值；
+-->
+    <select id="getEmployHaha" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where id =#{id} and emp_name =#{m.name} and age =#{ids[1]} and emp_salary=#{e.empSalary}
+    </select>
+</mapper>

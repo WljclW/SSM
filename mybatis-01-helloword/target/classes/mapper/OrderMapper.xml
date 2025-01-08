@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.OrderMapper">
+
+<!--
+    创建自定义的封装规则。
+    id：自定义的封装规则的id，以后需要这个规则的地方直接引用id即可
+-->
+    <resultMap id="OrderRM" type="com.example.mybatis01helloword.bean.Order">
+        <id property="id" column="id"/>
+        <result property="address" column="address"/>
+        <result property="amount" column="amount"/>
+        <result property="customerId" column="customer_id"/>
+        <!--association用于封装一对一的规则。。这里因为每一个Order实体类内含有一个Customer对象-->
+        <association property="customer" javaType="com.example.mybatis01helloword.bean.Customer">
+            <id property="id" column="c_id"/>
+            <result property="customerName" column="customer_name"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
+
+<!--
+    给出SQL语句(需要使用到上面自定义的封装规则)。并且 id指定该SQL对应的方法，resultMap指定我们自定义规则的id
+-->
+    <select id="getOrderByIdWithCustomer" resultMap="OrderRM">
+        select o.*,
+               c.id c_id,
+               c.customer_name
+        from t_order o
+        left join t_customer c on o.customer_id = c.id
+        where o.id = #{id}
+    </select>
+</mapper>

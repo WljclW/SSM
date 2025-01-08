@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.CustomerMapper">
+
+<!--自定义一个关联规则-->
+    <resultMap id="customerRM" type="com.example.mybatis01helloword.bean.Customer">
+        <id property="id" column="c_id"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="phone" column="phone"/>
+        <!--
+            由于一个用户对应很多订单，属性是list，因此需要：
+            ①使用collection标签
+            ②使用ofType指定list集合中元素的类型(全限定名)
+            ③使用property指定list集合在原类中的字段名
+        -->
+        <collection property="orderds" ofType="com.example.mybatis01helloword.bean.Order">
+            <id property="id" column="id"/>
+            <result property="address" column="address"/>
+            <result property="amount" column="amount"/>
+            <result property="customerId" column="customer_id"/>
+        </collection>
+    </resultMap>
+
+<!--
+    写SQL语句，通过resulMap指定关联的自定义规则是哪一个，id指定对应的方法名
+-->
+    <select id="getCustomerByIdWithOrders" resultMap="customerRM">
+        select c.id c_id,
+               c.customer_name,
+               c.phone,
+               o.*
+        from t_customer c
+                 left join t_order o on c.id = o.customer_id
+        where c.id = #{id}
+    </select>
+</mapper>

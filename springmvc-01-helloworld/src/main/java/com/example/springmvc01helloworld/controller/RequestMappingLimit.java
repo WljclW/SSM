@@ -1,0 +1,75 @@
+package com.example.springmvc01helloworld.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * 测试请求限定，即在请求映射中添加一些额外的参数来实现
+ *
+ * 请求方式：
+ *      GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
+ */
+@RestController
+public class RequestMappingLimit {
+
+    @RequestMapping(value = "test01",method = RequestMethod.POST)
+    public String test01(){
+        return "只能用post方法请求";
+    }
+
+    @RequestMapping(value = "test02",params = {"key1","key2","!key3"})
+    public String test02(){
+        return "要求：必须传键为key1，key2的参数，但是不能有键为key3的参数";
+    }
+
+    /**
+     * 请求参数：params = {"username","age"}
+     * 1）、key1：  表示请求必须包含key1参数
+     * 2）、key2=18：   表示请求参数中必须包含key2=18的参数
+     * 3）、gender!=1：  表示请求参数中不能包含gender=1的参数.。如果不传此参数也是可以。
+     *              就是如果有gender这样的键，它的值不能等于1；但是没有此键也可以
+     */
+    @RequestMapping(value = "test02",params = {"key1","key2=18","gender!=1"})
+    public String test03(){
+        return "要求：必须传键为key1，key2=18的参数,并且gender参数的值不能是1";
+    }
+
+
+    /**
+     * 请求头：headers = {"haha"}
+     * 1）、haha：  表示请求中必须包含名为haha的请求头
+     * 2）、hehe!=1：  表示请求头中 的 hehe 不能是1；（hehe=0是可以的，不带hehe也是可以的）
+     */
+    @RequestMapping(value = "/test04",headers = "haha")
+    public String test04(){
+        return "要求：请求的参数中必须带有haha";
+    }
+
+
+    /**
+     * 请求内容类型：consumes = {"application/json"}; 消费什么数据；
+     * Media Type：媒体类型
+     * 1）、application/json：  表示浏览器必须携带 json 格式的数据。
+     */
+    //consumes指定服务端消费的数据类型。。也就是说请求段请求的数据类型是什么，才能被服务端所理解
+    @RequestMapping(value = "/test05",consumes = "application/json")
+    public String test05(){
+        return "要求：请求的数据类型必须是json";
+    }
+
+    //要求服务端给浏览器返回的是纯文本信息
+    @RequestMapping(value = "/test06",produces = "text/pain")
+    public String test06(){
+        return "<h1>你好，我是服务端返回的数据</h1>";
+    }
+
+    /**
+     * 响应内容类型：produces = {"text/plain;charset=utf-8"}; 生产什么数据；
+     */
+    //返回的数据以html来进行解析
+    @RequestMapping(value = "/test07",produces = "text/html")
+    public String test07(){
+        return "<h1>你好，我是服务端返回的数据</h1>";
+    }
+}
