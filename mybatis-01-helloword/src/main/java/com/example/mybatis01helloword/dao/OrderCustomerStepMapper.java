@@ -9,9 +9,12 @@ import java.util.List;
 @Mapper
 public interface OrderCustomerStepMapper {
 
-    Customer gteCustomerById(Long id);
+    /**
+     *
+     * */
+    Customer gteCustomerById(Long id);  //按照id查询客户
 
-    List<Order> getOrdersByCustomerId(Long id);
+    List<Order> getOrdersByCustomerId(Long id);     //按照客户id查询订单
 
 
     /**
@@ -20,7 +23,7 @@ public interface OrderCustomerStepMapper {
      * @return
      */
     //3、分步查询：自动做两步 = 查询客户 + 查询客户下的订单
-    //这个方法去哦们希望：让mybaits来自动调用分布查询，直接返回id对应用户的所有订单
+    //这个方法我们希望：让mybaits来自动调用分布查询，直接返回客户id对应客户的所有订单
     Customer getOrdersByCustomerIdWithStep(Long id);
 
 
@@ -29,7 +32,7 @@ public interface OrderCustomerStepMapper {
      * @param id 订单id
      * @return
      */
-    //4、分步查询：自动做两步 = 按照id查询订单 + 查询下单的客户
+    //4、分步查询：自动做两步 = 按照id查询订单 + 查询下单的客户信息
     Order getOrderByIdAndCustomerStep(Long id);
 
 }

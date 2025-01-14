@@ -22,7 +22,7 @@ public interface EmpParamMapper {
 
     Emp getEmploy(Long id);
 
-    //    // 获取数组中第二个元素指定的用户
+    // 获取数组中第二个元素(id值)指定的用户
     Emp getEmploy02(List<Long> ids);
 
     // 对象属性取值，直接获取

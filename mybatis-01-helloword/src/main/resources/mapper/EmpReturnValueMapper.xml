@@ -15,20 +15,39 @@
     <select id="getAllMap" resultType="com.example.mybatis01helloword.bean.Emp">
         select * from t_emp
     </select>
-
     <!--    错误的例子-->
 <!--    <select id="getAllMap" resultType="java.util.Map">-->
 <!--        select * from t_emp-->
 <!--    </select>-->
 
 
+
+
+                    <!--如果方法getEmpById的sql写成下面的样子会出出现：个别字段封装的值时null-->
+            <!--
+                原因：数据库字段的名和java实体类中字段的名不一样
+                默认封装规则：javaBean中的属性名 对应 数据库字段的名 一一封装，没有匹配的字段，则给
+                    javaBean对应的属性封装值为null
+            -->
+            <!--解决的办法
+                方法1：在SQL语句中给查询所得的列起别名
+                方法2：在properties文件配置驼峰命名自动映射
+                方法3：使用ResultMap(实现自定义结果集)
+            -->
+<!--    <select id="getEmpById" resultMap="com.example.mybatis01helloword.bean.Emp">-->
+<!--        select * from t_emp where id = #{id}-->
+<!--    </select>-->
+
+
 <!--
-    下面是自定义结果封装规则的演示.
+    下面是自定义结果封装规则的演示....
+    【核心就是在标签resultMap中明确的指定一对一(javaBean的属性 和 数据表的字段)的关联关系】
 -->
     <!--声明一个名字是empMapRM的结果集resultMap，这样在需要的时候引用它的id就可以了-->
     <resultMap id="empMapRM" type="com.example.mybatis01helloword.bean.Emp">
         <!--id：声明主键映射规则-->
         <id property="id" column="id"/>
+        <!--result：声明非主键的映射规则(property指定javaBean的属性名，column指定对应数据表的字段名)-->
         <result property="empName" column="emp_name"/>
         <result property="age" column="age"/>
         <result property="empSalary" column="emp_salary"/>

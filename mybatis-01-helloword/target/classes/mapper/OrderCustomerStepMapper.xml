@@ -2,11 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.mybatis01helloword.dao.OrderCustomerStepMapper">
 
-
     <select id="gteCustomerById" resultType="com.example.mybatis01helloword.bean.Customer">
         select * from t_customer where id = #{id}
     </select>
-
 
     <select id="getOrdersByCustomerId" resultType="com.example.mybatis01helloword.bean.Order">
         select * from t_order where customer_id = #{id}
@@ -25,15 +23,17 @@
                     column="id">
             <!--实验的出错点：select="com.atguigu.mybatis.mapper.OrderCustomerStepMapper.getOrdersByCustomerId"-->
         </collection>
-        <!--    告诉MyBatis，封装 orders 属性的时候，是一个集合，
+        <!--    collection标签作用：告诉MyBatis，封装 orders 属性的时候，是一个集合，
                 但是这个集合需要调用另一个 方法 进行查询；select：来指定我们要调用的另一个方法
                 column：来指定我们要调用方法时，把哪一列的值作为传递的参数，交给这个方法
-                   1）、column="id"： 单传参：id传递给方法
-                   2）、column="{cid=id,name=customer_name}"：多传参（属性名=列名）；
+                   1）select对应的方法只有一个参数：column="id"： 单传参：id传递给方法
+                   2）select对应的方法有多个参数：column="{cid=id,name=customer_name}"：多传参（属性名=列名）；
                         cid=id：cid是属性名，它是id列的值
                         name=customer_name：name是属性名，它是customer_name列的值
         -->
     </resultMap>
+
+
 
     <select id="getOrdersByCustomerIdWithStep" resultMap="CustomerOrdersStepRM">
         select * from t_customer where id = #{id}

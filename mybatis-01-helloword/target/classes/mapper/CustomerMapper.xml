@@ -8,9 +8,9 @@
         <result property="customerName" column="customer_name"/>
         <result property="phone" column="phone"/>
         <!--
-            由于一个用户对应很多订单，属性是list，因此需要：
+            由于一个用户对应很多订单(一对多的映射)，属性是list，因此需要：
             ①使用collection标签
-            ②使用ofType指定list集合中元素的类型(全限定名)
+            ②使用ofType指定list集合中元素的类型(全限定名，比如这里的Order这种Bean)
             ③使用property指定list集合在原类中的字段名
         -->
         <collection property="orderds" ofType="com.example.mybatis01helloword.bean.Order">
@@ -20,6 +20,7 @@
             <result property="customerId" column="customer_id"/>
         </collection>
     </resultMap>
+
 
 <!--
     写SQL语句，通过resulMap指定关联的自定义规则是哪一个，id指定对应的方法名

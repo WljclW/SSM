@@ -4,14 +4,17 @@
 
 <!--
     创建自定义的封装规则。
-    id：自定义的封装规则的id，以后需要这个规则的地方直接引用id即可
+    id：自定义的封装规则的id，以后需要这个规则的地方直接引用id即可【建议使用id来封装表的主键映射关系】
 -->
     <resultMap id="OrderRM" type="com.example.mybatis01helloword.bean.Order">
         <id property="id" column="id"/>
         <result property="address" column="address"/>
         <result property="amount" column="amount"/>
         <result property="customerId" column="customer_id"/>
-        <!--association用于封装一对一的规则。。这里因为每一个Order实体类内含有一个Customer对象-->
+        <!--
+            association用于封装一对一的规则，比如这里的一个订单对应了一个客户信息。。
+            这里因为每一个Order实体类内含有一个Customer对象因此使用
+        -->
         <association property="customer" javaType="com.example.mybatis01helloword.bean.Customer">
             <id property="id" column="c_id"/>
             <result property="customerName" column="customer_name"/>
@@ -25,7 +28,8 @@
     <select id="getOrderByIdWithCustomer" resultMap="OrderRM">
         select o.*,
                c.id c_id,
-               c.customer_name
+               c.customer_name,
+                c.phone
         from t_order o
         left join t_customer c on o.customer_id = c.id
         where o.id = #{id}
