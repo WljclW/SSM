@@ -13,6 +13,7 @@
         <result property="customerId" column="customer_id"/>
         <!--
             association用于封装一对一的规则，比如这里的一个订单对应了一个客户信息。。
+            association的property指定封装的属性名(即对应于java类的哪一个属性)，javaType指定封装的属性的类型。
             这里因为每一个Order实体类内含有一个Customer对象因此使用
         -->
         <association property="customer" javaType="com.example.mybatis01helloword.bean.Customer">

@@ -6,13 +6,18 @@
         select * from t_customer where id = #{id}
     </select>
 
-    <select id="getOrdersByCustomerId" resultType="com.example.mybatis01helloword.bean.Order">
+    <!--下面的封装希望完成通过id查询 客户 以及 该客户的所有订单。-->
+    <select id="gteCustomerById01" resultType="com.example.mybatis01helloword.bean.Customer">
+        select * from t_customer where id = #{id}
+    </select>
+
+    <select id="getOrdersByCustomerId" resultMap="CustomerOrdersStepRM">
         select * from t_order where customer_id = #{id}
     </select>
 
 
-<!--分布查询的自定义结果集-->
-    <!--   分步查询的自定义结果集： -->
+<!--=====================================下面分步查询的自定义结果集===========================================-->
+    <!--***********************下面是分步实现：根据id查询对应的客户，以及该客户对应的所有订单*******************************-->
     <resultMap id="CustomerOrdersStepRM" type="com.example.mybatis01helloword.bean.Customer">
         <id column="id" property="id"></id>
         <result column="customer_name" property="customerName"></result>
@@ -68,6 +73,25 @@
 
 
     <select id="getOrderByIdAndCustomerStep" resultMap="OrderCustomerStepRM">
+        select * from t_order where id = #{id}
+    </select>
+
+
+    <!--*****************************下面的操作用来实现：根据id查询出订单，以及该订单对应的客户，以及该客户所有的订单*********-->
+    <resultMap id="OrderCustomerStepRM1" type="com.example.mybatis01helloword.bean.Order">
+        <id property="id" column="id"></id>
+        <result property="address" column="address"></result>
+        <result property="amount" column="amount"></result>
+        <result property="customerId" column="customer_id"></result>
+        <association property="customer"
+                     javaType="com.example.mybatis01helloword.bean.Customer"
+                     select="gteCustomerById01"
+                     column="customer_id">
+        </association>
+    </resultMap>
+
+
+    <select id="getOrderByIdAndCustomerWithOrdersStep2" resultMap="OrderCustomerStepRM1">
         select * from t_order where id = #{id}
     </select>
 </mapper>

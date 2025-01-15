@@ -27,4 +27,13 @@ public class StepTest {
         Customer ordersByCustomerIdWithStep = orderCustomerStepMapper.getOrdersByCustomerIdWithStep(1L);
         System.out.println(ordersByCustomerIdWithStep);
     }
+
+
+
+
+    @Test
+    void test03(){
+        Order orderByIdAndCustomerWithOrdersStep2 = orderCustomerStepMapper.getOrderByIdAndCustomerWithOrdersStep2(1L);
+        System.out.println(orderByIdAndCustomerWithOrdersStep2);
+    }
 }

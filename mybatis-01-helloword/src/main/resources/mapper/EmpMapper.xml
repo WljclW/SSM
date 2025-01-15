@@ -8,8 +8,8 @@
 -->
 <!--Emp getEmpById(Integer id);
     select 标签代表一次查询
-   id：绑定方法名
-   resultType：返回值类型
+   id：绑定该查询对应的 方法名
+   resultType：返回值类型（全类名）
 -->
     <select id="getEmpById" resultType="com.example.mybatis01helloword.bean.Emp">
         select id, emp_name empName, age, emp_salary empSalary from t_emp where id = #{id}

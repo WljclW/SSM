@@ -9,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * 测试 接口中方法的形参 和 xml文件中SQL使用变量 的对应关系
+ * */
 @SpringBootTest     //不加这个注解会报错：Cannot invoke "com.example.mybatis01helloword.dao.EmpParamMapper.getEmploy(java.lang.Long)" because "this.empParamMapper" is null
 public class ParamTest {
     @Autowired

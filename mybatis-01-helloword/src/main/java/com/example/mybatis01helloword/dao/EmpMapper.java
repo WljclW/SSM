@@ -15,7 +15,7 @@ public interface EmpMapper {
 
     List<Emp> getAllEmp();  //获取该表所有的记录
 
-    void addEmp(Emp emp);
+    void addEmp(Emp emp);   //由于只有一个参数，因此xml中直接使用#{属性名}来拿属性就行。比如#{empName}表示拿出emp对象的empName属性
 
     void deleteEmpById(Integer id);
 

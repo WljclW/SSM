@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 /**
+ * MyBatis的参数传递方式(xxxMapper接口中的参数 和 xml文件中SQL语句所使用的参数)：
  * 单个参数：
  *   1、#{参数名} 就可以取值。
  *   2、Map和JavaBean，#{key/属性名} 都可以取值。
@@ -33,7 +34,7 @@ public interface EmpParamMapper {
     void addEmploy2(Map<String, Object> m);
 
 
-    //==========以上是单个参数测试==============
+    //==========以上是单个参数测试，下面是方法有多个参数的实验==============
 
     //  以后多个参数直接规范一点，用@Param指定参数名， #{参数名} 就可以取值。【在java中通过@Param指定参数名，在xml文件中通过这个指定的参数
     // 名就可以拿到java方法中对应的形参变量】

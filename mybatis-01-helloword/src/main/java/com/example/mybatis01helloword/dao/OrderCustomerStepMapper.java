@@ -35,4 +35,6 @@ public interface OrderCustomerStepMapper {
     //4、分步查询：自动做两步 = 按照id查询订单 + 查询下单的客户信息
     Order getOrderByIdAndCustomerStep(Long id);
 
+    Order getOrderByIdAndCustomerWithOrdersStep2(Long id);
+
 }
