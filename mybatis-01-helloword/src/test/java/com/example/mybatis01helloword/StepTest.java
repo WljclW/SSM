@@ -33,7 +33,7 @@ public class StepTest {
 
     @Test
     void test03(){
-        Order orderByIdAndCustomerWithOrdersStep2 = orderCustomerStepMapper.getOrderByIdAndCustomerWithOrdersStep2(1L);
+        Order orderByIdAndCustomerWithOrdersStep2 = orderCustomerStepMapper.getOrderByIdAndCustomerAndOtherOrdersStep(1L);
         System.out.println(orderByIdAndCustomerWithOrdersStep2);
     }
 }

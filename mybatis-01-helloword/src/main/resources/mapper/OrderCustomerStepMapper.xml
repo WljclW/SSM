@@ -6,11 +6,6 @@
         select * from t_customer where id = #{id}
     </select>
 
-    <!--下面的封装希望完成通过id查询 客户 以及 该客户的所有订单。-->
-    <select id="gteCustomerById01" resultType="com.example.mybatis01helloword.bean.Customer">
-        select * from t_customer where id = #{id}
-    </select>
-
     <select id="getOrdersByCustomerId" resultMap="CustomerOrdersStepRM">
         select * from t_order where customer_id = #{id}
     </select>
@@ -39,7 +34,7 @@
     </resultMap>
 
 
-
+    <!--   按照id查询客户 -->
     <select id="getOrdersByCustomerIdWithStep" resultMap="CustomerOrdersStepRM">
         select * from t_customer where id = #{id}
     </select>
@@ -78,20 +73,38 @@
 
 
     <!--*****************************下面的操作用来实现：根据id查询出订单，以及该订单对应的客户，以及该客户所有的订单*********-->
+    <!-- 这里是封装根据id查询得到的order -->
     <resultMap id="OrderCustomerStepRM1" type="com.example.mybatis01helloword.bean.Order">
         <id property="id" column="id"></id>
         <result property="address" column="address"></result>
         <result property="amount" column="amount"></result>
         <result property="customerId" column="customer_id"></result>
+        <!-- 订单中的属性customer需要单独进行封装 -->
         <association property="customer"
-                     javaType="com.example.mybatis01helloword.bean.Customer"
-                     select="gteCustomerById01"
+                     select="com.atguigu.mybatis.mapper.OrderCustomerStepMapper.getOrdersByCustomerIdWithStep01"
                      column="customer_id">
         </association>
     </resultMap>
+    <!--   按照id查询客户 -->
+    <select id="getOrdersByCustomerIdWithStep01" resultMap="CustomerOrdersStepRM01">
+        select * from t_customer where id = #{id}
+    </select>
+    <!-- 这个是对于“根据id查询得到的客户的结果的封装”-->
+    <resultMap id="CustomerOrdersStepRM01" type="com.example.mybatis01helloword.bean.Customer">
+        <id column="id" property="id"></id>
+        <result column="customer_name" property="customerName"></result>
+        <result column="phone" property="phone"></result>
+        <collection property="orderds"
+                    select="com.atguigu.mybatis.mapper.OrderCustomerStepMapper.getOrdersByCustomerId01"
+                    column="id">
+        </collection>
+    </resultMap>
+    <select id="getOrdersByCustomerId01" resultType="com.example.mybatis01helloword.bean.Order">
+        select * from t_order where customer_id = #{id}
+    </select>
 
 
-    <select id="getOrderByIdAndCustomerWithOrdersStep2" resultMap="OrderCustomerStepRM1">
+    <select id="getOrderByIdAndCustomerAndOtherOrdersStep" resultMap="OrderCustomerStepRM1">
         select * from t_order where id = #{id}
     </select>
 </mapper>

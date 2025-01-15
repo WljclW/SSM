@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.EmpDynamicSqlMapper">
+
+    <!--    如果是普通的查询就是下面的形式      -->
+    <select id="queryEmpByNameAndSalary01" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where emp_name=#{name} and emp_salary=#{salaryy}
+    </select>
+    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where
+        <if test="name!=null">
+            emp_name=#{name}
+        </if>
+        <if test="salaryy!=null">
+            and emp_salary=#{salaryy}
+        </if>
+    </select>
+
+
+</mapper>
