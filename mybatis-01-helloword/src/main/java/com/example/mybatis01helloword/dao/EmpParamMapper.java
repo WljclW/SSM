@@ -35,10 +35,12 @@ public interface EmpParamMapper {
 
     //==========以上是单个参数测试==============
 
-    //以后多个参数直接规范一点，用@Param指定参数名， #{参数名} 就可以取值。
+    //  以后多个参数直接规范一点，用@Param指定参数名， #{参数名} 就可以取值。【在java中通过@Param指定参数名，在xml文件中通过这个指定的参数
+    // 名就可以拿到java方法中对应的形参变量】
     Emp getEmployByIdAndName(@Param("id") Long id, @Param("empName") String name);
 
 
+    // 想实现的功能：
     // select * from emp where id = #{id} and emp_name = #{从map中取到的name} and age = #{ids的第三个参数值} and salary = #{e中的salary}
     Emp getEmployHaha(@Param("id") Long id,
                       @Param("m") Map<String,Object> m,

@@ -9,7 +9,12 @@
         insert into t_emp(emp_name,age) values (#{empName},#{age})
     </insert>
 
-    <insert id="addEmploy2">
+    <!--下面的写法运行时直接报错，原因未知-->
+<!--    <insert id="addEmploy">-->
+<!--        insert into t_emp(emp_name,age) values (${empName},${age})-->
+<!--    </insert>-->
+
+    <insert id="addEmploy2">   <!--注意：只要方法只有一个参数，取该参数的某字段-->
         insert into t_emp(emp_name,age) values (#{empName},#{age})
     </insert>
 
@@ -17,18 +22,23 @@
         select * from t_emp where id = #{abc}
     </select>
 
+    <!--可以用下面的select语句来对比${}和#{}两种方式的区别}-->
+<!--    <select id="getEmploy" resultType="com.example.mybatis01helloword.bean.Emp">-->
+<!--        select * from t_emp where id = ${abc}-->
+<!--    </select>-->
+
     <select id="getEmploy02" resultType="com.example.mybatis01helloword.bean.Emp">
         select * from t_emp where id = #{ids[1]}
     </select>
     <select id="getEmployByIdAndName" resultType="com.example.mybatis01helloword.bean.Emp">
-        select * from t_emp where id = #{id} and emp_name = #{empName}
+        select * from t_emp where id = #{id} and emp_name = #{empName}      <!--方法头通过@Param指定参数，因此这里使用注解指定的参数-->
     </select>
 
 <!--
     对于多参数建议：
         在Mapper接口的方法的形参中添加@Param指定参数名；然后在xml文件SQL语句中的"#{}"内填写@Param指
         定的参数名即可；
-    解释：#{id}表示拿到参数id的值；#{m.name}表示拿到参数m(一个hashmap)的name属性的值；#{ids[1]}表示拿到参数ids列表
+    解释：#{id}表示拿到参数id的值；#{m.name}表示拿到参数m(一个hashmap)的name这个键对应的值；#{ids[1]}表示拿到参数ids列表
          的第二个元素；#{e.empSalary}表示拿到参数e的empSalary属性的值；
 -->
     <select id="getEmployHaha" resultType="com.example.mybatis01helloword.bean.Emp">

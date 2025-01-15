@@ -5,6 +5,7 @@ import com.example.demo01ioc.Bean.*;
 import com.example.demo01ioc.controller.UserController;
 import com.example.demo01ioc.datasource.MyDatasource;
 import com.example.demo01ioc.service.HahaService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

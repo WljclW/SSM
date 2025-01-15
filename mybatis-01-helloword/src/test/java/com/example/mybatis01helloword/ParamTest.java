@@ -18,9 +18,10 @@ public class ParamTest {
     void paramTest03(){
         HashMap<String, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("name","jerry");
+        objectObjectHashMap.put("name1","jerry02");
         Emp emp = new Emp();
         emp.setEmpSalary(666.66);
-        empParamMapper.getEmployHaha(2L,objectObjectHashMap, Arrays.asList(20L,19L,21L,22L,34L),emp);
+        System.out.println(empParamMapper.getEmployHaha(6L, objectObjectHashMap, Arrays.asList(20L, 19L, 21L, 22L, 34L), emp));
     }
 
 
@@ -30,6 +31,14 @@ public class ParamTest {
         System.out.println(zhangsan);
     }
 
+    @Test
+    void paramTestEmp(){
+        Emp emp = new Emp();
+        emp.setEmpName("jerry01");
+        emp.setAge(21);
+        emp.setEmpSalary(666.66);
+        empParamMapper.addEmploy(emp);
+    }
 
     @Test
     public void test01() {
