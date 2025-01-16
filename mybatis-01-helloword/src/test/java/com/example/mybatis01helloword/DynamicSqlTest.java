@@ -15,6 +15,6 @@ public class DynamicSqlTest {
 
     @Test
     public void test01() {
-        empDynamicSqlMapper.queryEmpByNameAndSalary(null, new BigDecimal(1000));
+        empDynamicSqlMapper.queryEmpByNameAndSalary(null, null);
     }
 }

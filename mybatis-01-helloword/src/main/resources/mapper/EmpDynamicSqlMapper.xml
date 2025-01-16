@@ -2,13 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.mybatis01helloword.dao.EmpDynamicSqlMapper">
 
-    <!--    如果是普通的查询就是下面的形式      -->
+    <!--==============================    如果是普通的查询就是下面的形式     ==================================-->
     <select id="queryEmpByNameAndSalary01" resultType="com.example.mybatis01helloword.bean.Emp">
         select * from t_emp where emp_name=#{name} and emp_salary=#{salaryy}
     </select>
-    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">
+
+    <!---============ 引入if标签，表示满足条件的时候才会加入指定的语句。（java语句怎么写，条件就怎么写）-===================-->
+    <!--
+        引入后存在的问题：
+        1.如果两个条件都不满足，SQL语句就变成 select * from t_emp where
+        2.如果第一个条件是空，第二个条件不是空，SQL语句就变成 select * from t_emp where and emp_salary=?
+        很明显这样的情况下语法是错误的
+    -->
+    <select id="queryEmpByNameAndSalary02" resultType="com.example.mybatis01helloword.bean.Emp">
         select * from t_emp where
-        <if test="name!=null">
+        <if test="name!=null">  <!--用if标签的test属性来设置 某条件满足时做什么事-->
             emp_name=#{name}
         </if>
         <if test="salaryy!=null">
@@ -16,5 +24,20 @@
         </if>
     </select>
 
+    <!--========================    引入where标签，这个标签会自动去除某些条件不满足时导致出现的语法错误       =================-->
+    <!--比如下面的使用方法就没问题-->
+    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <where>
+            <if test="name!=null">
+                emp_name=#{name}
+            </if>
+            <if test="salaryy!=null">
+                and emp_salary=#{salaryy}
+            </if>
+        </where>
+    </select>
+
+    <!--=======================     用trim可以实现where标签的效果     =====================================-->
 
 </mapper>
