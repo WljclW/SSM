@@ -32,7 +32,7 @@ public class DynamicSqlTest {
         empDynamicSqlMapper.updateEmp(emp);
     }
 
-    @Test
+    @Test   //测试条件查询
     public void test03(){
         empDynamicSqlMapper.queryEmpByNameAndSalaryWhen("aaa",new BigDecimal(3333));
 //        empDynamicSqlMapper.queryEmpByNameAndSalaryWhen(null,new BigDecimal(3333));   //name如果是null会走第二个分支
@@ -61,7 +61,7 @@ public class DynamicSqlTest {
         empDynamicSqlMapper.addEmps(emps);
     }
 
-    @Test
+    @Test   //测试批量更新
     public void test06(){
         ArrayList<Emp> emps = new ArrayList<>();
         for(int i=0;i<100;i++){
