@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.EmpDynamicSqlMapperPractice">
+    <insert id="addEmps">
+        insert into t_emp (emp_name,age,emp_salary)
+        <foreach collection="emps" item="emp" open="values" separator=",">
+            (#{emp.empName},#{emp.age},#{emp.empSalary})
+        </foreach>
+    </insert>
+    <update id="updateEmp">
+        update t_emp
+        <set>
+            <if test="empName!=null">
+                emp_name = #{empName},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="empSalary!=null">
+                emp_salary = #{empSalary},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateEmps">
+        <foreach collection="emps" item="emp" separator=";">
+            update t_emp
+            <set>
+                <if test="emp.empName!=null">
+                    emp_name = #{emp.empName},
+                </if>
+                <if test="emp.age!=null">
+                    age = #{emp.age},
+                </if>
+                <if test="emp.empSalary!=null">
+                    emp_salary = #{emp.empSalary}
+                </if>
+            </set>
+            <where>
+                <if test="emp.id!=null">
+                    id = #{emp.id}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <where>
+            <if test="name!=null">
+                emp_name = #{name}
+            </if>
+            <if test="salaryy!=null">
+               and emp_salary = #{salaryy}
+            </if>
+        </where>
+    </select>
+    <select id="queryEmpByNameAndSalaryWhen" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="name!=null">
+                    emp_name = #{name}
+                </when>
+                <when test="salaryy!=null">
+                    emp_salary = #{salaryy}
+                </when>
+                <otherwise>
+                    id=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <select id="getEmpByIdIn" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <if test="ids!=null">
+            <foreach collection="ids" item="id" separator="," open="where id in(" close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+</mapper>

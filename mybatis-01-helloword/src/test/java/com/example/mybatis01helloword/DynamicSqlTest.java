@@ -19,7 +19,9 @@ public class DynamicSqlTest {
 
     @Test   //测试查询操作
     public void test01() {
-        empDynamicSqlMapper.queryEmpByNameAndSalary(null, null);
+        empDynamicSqlMapper.queryEmpByNameAndSalary("null", null);
+        empDynamicSqlMapper.queryEmpByNameAndSalary(null,new BigDecimal(1000)); //测试第二个条件是不是会多and
+        empDynamicSqlMapper.queryEmpByNameAndSalary(null,null); //测试如果没有条件会不会多where
     }
 
     @Test //测试更新操作
