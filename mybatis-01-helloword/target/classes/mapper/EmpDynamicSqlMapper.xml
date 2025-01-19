@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis01helloword.dao.EmpDynamicSqlMapper">
+
+    <!--==============================    如果是普通的查询就是下面的形式     ==================================-->
+    <select id="queryEmpByNameAndSalary01" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where emp_name=#{name} and emp_salary=#{salaryy}
+    </select>
+
+    <!---============ 引入if标签，表示满足条件的时候才会加入指定的语句。（java语句怎么写，条件就怎么写）-===================-->
+    <!--
+        引入后存在的问题：
+        1.如果两个条件都不满足，SQL语句就变成 select * from t_emp where
+        2.如果第一个条件是空，第二个条件不是空，SQL语句就变成 select * from t_emp where and emp_salary=?
+        很明显这样的情况下语法是错误的
+    -->
+    <select id="queryEmpByNameAndSalary02" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp where
+        <if test="name!=null">  <!--用if标签的test属性来设置 某条件满足时做什么事-->
+            emp_name=#{name}
+        </if>
+        <if test="salaryy!=null">
+            and emp_salary=#{salaryy}
+        </if>
+    </select>
+
+    <!--========================    引入where标签，这个标签会自动去除某些条件不满足时导致出现的语法错误       =================-->
+    <!--比如下面的使用方法就没问题-->
+    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <where>
+            <if test="name!=null">
+                emp_name=#{name}
+            </if>
+            <if test="salaryy!=null">
+                and emp_salary=#{salaryy}
+            </if>
+        </where>
+    </select>
+
+
+    <!--=======================     更新操作    ===================================================-->
+    <!--**********      这是普通模式，但是存在问题      *****************-->
+    <!--
+        1. bean中未赋值的属性在数据库字段赋值为null
+    -->
+    <update id="updateEmp01">
+        update t_emp set
+                         emp_name=#{empName},
+                         emp_salary=#{empSalary},
+                            age=#{age}
+        where id=#{id}
+    </update>
+    <!--*******************     update语句中使用set标签可以解决语句中间多余的，等问题     ***************************-->
+    <update id="updateEmp">
+        update t_emp
+        <set>        <!--set标签和where标签是类似的，是为了解决SQL语法问题-->
+            <if test="empName!=null">
+                emp_name = #{empName},      <!--if条件内的语句需要正常写，这里的","省略的话运行会报错-->
+            </if>
+            <if test="empSalary !=null">
+                emp_salary = #{empSalary},
+            </if>
+            <if test="age!=null">
+                age = #{age}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- trim
+        prefix：前缀 ; 如果标签体中有东西，就给它们拼一个前缀
+        suffix：后缀 ;  如果标签体中有东西，就给它们拼一个前缀
+        prefixOverrides：前缀覆盖； 标签体中最终生成的字符串，如果以指定前缀开始，就覆盖成空串
+        suffixOverrides：后缀覆盖
+    -->
+    <!--============    trim版本实现where       =============-->
+<!--    <select id="queryEmpByNameAndSalary" resultType="com.example.mybatis01helloword.bean.Emp">-->
+<!--        select * from t_emp-->
+<!--        <trim prefix="where" prefixOverrides="and | or">-->
+<!--            <if test="name != null">-->
+<!--                emp_name = #{name}-->
+<!--            </if>-->
+<!--            <if test="salaryy!=null">-->
+<!--                and emp_salary = #{salary}-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </select>-->
+
+    <!--===================================     otherwise标签的演示      ============================================-->
+    <!--
+        otherwise标签中只有一个分支可以走，因此不用担心多余的 , 或者 and 等。
+    -->
+    <select id="queryEmpByNameAndSalaryWhen" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+        <where>
+            <choose>    <!--标签内的多个分支只能走其中的一个。每一个when就相当于if-else；最后的ortherwise就相当于else-->
+                <when test="name!=null">
+                    emp_name = #{name}
+                </when>
+                <when test="salaryy>=3000">
+                    emp_salary = #{salaryy}
+                </when>
+                <otherwise>
+                    id=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--=================================批量查询的实现============================================-->
+    <select id="getEmpByIdIn" resultType="com.example.mybatis01helloword.bean.Emp">
+        select * from t_emp
+            <if test="ids!=null">    <!--否则ids是空的时候会报错-->
+                <foreach collection="ids" item="id" separator="," open="where id IN (" close=")">    <!--open表示ids不是空的话以什么开头；close表示ids不是空的时候以什么结尾-->
+                    #{id}
+                </foreach>
+            </if>
+    </select>
+
+    <!--==========================================批量插入的实现==============================================-->
+    <insert id="addEmps">
+        insert into t_emp (emp_name,age,emp_salary) values
+        <foreach collection="emps" item="emp" separator=",">    <!--插入的每一组值(foreach中的每一轮)之间使用,分隔开-->
+            (#{emp.empName},#{emp.age},#{emp.empSalary})
+        </foreach>
+    </insert>
+
+    <!--===============================     批量修改的实现     =======================================-->
+    <update id="updateEmps">
+        <foreach collection="emps" item="emp" separator=";">
+            update t_emp
+            <set>
+                <if test="emp.empName!=null">
+                    emp_name = #{emp.empName},
+                </if>
+                <if test="emp.age!=null">
+                    age = #{emp.age},
+                </if>
+                <if test="emp.empSalary!=null">
+                    emp_salary = #{emp.empSalary}
+                </if>
+            </set>
+            where id = #{emp.id}
+        </foreach>
+    </update>
+
+</mapper>
