@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="springmvc-01-helloworld" />
         <module name="mybatis-01-helloword" />
+        <module name="springboot-01-demo" />
         <module name="demo-01-ioc" />
         <module name="demo-02-aop" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="demo-01-ioc" options="-parameters" />
       <module name="demo-02-aop" options="-parameters" />
       <module name="mybatis-01-helloword" options="-parameters" />
+      <module name="springboot-01-demo" options="-parameters" />
       <module name="springmvc-01-helloworld" options="-parameters" />
     </option>
   </component>

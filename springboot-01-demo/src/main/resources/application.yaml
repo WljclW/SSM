@@ -1,0 +1,32 @@
+#缩进表示层级关系，只要是同一个缩进就表示是同一个层级。一般每次的缩进是一个空格
+spring:
+  application:
+    name: springboot-01-demo
+person:
+  name: 张三
+  age: 18
+  birthday: 1990/01/01
+  like: true
+  child:
+    name: 李四
+    age: 20
+    birthday: 1991/01/01
+    text: ["as","asd","asd"]
+  dogs:
+    - name: 旺财
+      age: 2
+    - name: 大黄
+      age: 3
+    - name: 小黄
+      age: 4
+  cats:
+    bluecat:
+      name: 蓝猫
+      age: 2
+    redcat:
+      name: 红猫
+      age: 3
+    blackcat:
+      name: 黑猫
+      age: 4
+
