@@ -30,3 +30,13 @@ person:
       name: 黑猫
       age: 4
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      shutdown:
+        enabled: true
