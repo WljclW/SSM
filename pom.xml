@@ -21,6 +21,7 @@
         <module>springmvc-01-helloworld</module>
         <module>mybatis-01-helloword</module>
         <module>springboot-01-demo</module>
+        <module>spring-start-demo</module>
     </modules>
 
 </project>

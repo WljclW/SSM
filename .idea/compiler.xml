@@ -8,10 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="springmvc-01-helloworld" />
+        <module name="robot-spring-boot-starter" />
         <module name="mybatis-01-helloword" />
-        <module name="springboot-01-demo" />
+        <module name="spring-start-demo" />
         <module name="demo-01-ioc" />
+        <module name="springboot-01-demo" />
         <module name="demo-02-aop" />
+        <module name="spring-starter-demo" />
       </profile>
     </annotationProcessing>
   </component>
@@ -20,6 +23,8 @@
       <module name="demo-01-ioc" options="-parameters" />
       <module name="demo-02-aop" options="-parameters" />
       <module name="mybatis-01-helloword" options="-parameters" />
+      <module name="robot-spring-boot-starter" options="-parameters" />
+      <module name="spring-start-demo" options="-parameters" />
       <module name="springboot-01-demo" options="-parameters" />
       <module name="springmvc-01-helloworld" options="-parameters" />
     </option>
