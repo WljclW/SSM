@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
  */
 //@Import(RobotAutoConfiguration.class)     //第一档：引入自定义starter的 自动配置类
 //@EnableRobot    //第二档：引入自定义starter的 注解(底层其实是注解做了“@Import(RobotAutoConfiguration.class)”的事)
-    //第三檔：什么都不用做，只用在pom中添加依赖即可。原理：在当前项目的文件\resources\META-INF\spring\org.springframework.boot.autoconfigure.AutoConfiguration.imports中写上自动配置类的全路径。
+    //第三档：什么都不用做，只用在pom中添加依赖即可。原理：在当前项目的文件\resources\META-INF\spring\org.springframework.boot.autoconfigure.AutoConfiguration.imports中写上自动配置类的全路径。
 @SpringBootApplication
 public class SpringStartDemoApplication {
 
