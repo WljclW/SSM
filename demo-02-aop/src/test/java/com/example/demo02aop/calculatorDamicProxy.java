@@ -25,7 +25,7 @@ public class calculatorDamicProxy {
         UserServiceImpl userService = new UserServiceImpl();
         UserService o = (UserService) DynamicProxy.newProxyInstance(userService);
         o.saveUser();
-        System.out.println("==============测试dev方法的执行");
+        System.out.println("==============测试dev方法的执行=================");
         MathCalculator o1 = (MathCalculator)DynamicProxy.newProxyInstance(myCalculator);
         o1.dev(10,0);
     }
@@ -56,7 +56,7 @@ public class calculatorDamicProxy {
              */
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Object invoke = method.invoke(method, args);
+                Object invoke = method.invoke(myCalculator, args);
                 return null;
             }
         };
@@ -72,15 +72,16 @@ public class calculatorDamicProxy {
             args[0] = 0;
             System.out.println("修改后的参数："+Arrays.asList(args));
             System.out.println("原始方法执行前打印日志..........");
-            method.invoke(myCalculator,args);
+            method.invoke(myCalculator,args);   //执行 被代理类的方法
             System.out.println("原始方法执行后打印日志..........");
             return 0;
         };
 
 
-        MathCalculator o = (MathCalculator)Proxy.newProxyInstance(myCalculator.getClass().getClassLoader(),
-                myCalculator.getClass().getInterfaces(),
-                ihx
+        MathCalculator o = (MathCalculator)Proxy.newProxyInstance(
+                myCalculator.getClass().getClassLoader(),   //参数一：被代理类的类加载器
+                myCalculator.getClass().getInterfaces(),    //参数二：被代理类实现的接口
+                ihx                                          //参数三：代理对象对应的 InvocationHandler
         );
         System.out.println(o.add(1, 2));
     }

@@ -1,0 +1,7 @@
+这个包用于对aop的实验————在spring中就体现为
+    @Before、@After、@AfterReturning、@AfterThrowing
+    @Around
+    上面的几个注解。
+
+演示内容：
+1.TargetClass是一个没有实现接口的类；在切面AopAspect中实现对它中方法的切入

@@ -13,7 +13,7 @@ public class MyCalculatorStaticProxy implements MathCalculator {
 //    @Autowired
 //    private MyCalculator target;
 
-    private MathCalculator target; //目标对象
+    private MathCalculator target; //目标对象。用接口来声明字段
 
     public MyCalculatorStaticProxy(MathCalculator mc){
         this.target = mc;
@@ -26,6 +26,9 @@ public class MyCalculatorStaticProxy implements MathCalculator {
         System.out.println("静态代码在方法执行后的操作.........");
         return  res;
     }
+    /*
+    * 像add方法一样，下面的sub、mutil、dev方法也一样.可以在调用被代理类的方法前和后执行一些额外的操作
+    * */
 
     @Override
     public int sub(int i, int j) {

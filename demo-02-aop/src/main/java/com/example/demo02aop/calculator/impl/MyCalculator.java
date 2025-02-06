@@ -13,7 +13,7 @@ public class MyCalculator implements MathCalculator {
      *      3.动态代理：运行期间才决定好代理关系(拦截器，拦截所有)
      *          目标对象在执行期间会被拦截，插入指定逻辑
      *          优点：可以代理世间万物
-     *          缺点：
+     *          缺点：被代理类必须实现接口
      * */
 
     @Override

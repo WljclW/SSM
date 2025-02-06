@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class testStaticProxy {
     @Autowired
-    MyCalculatorStaticProxy myCalculatorStaticProxy;
+    MyCalculatorStaticProxy myCalculatorStaticProxy; //直接用静态代理类去计算加法，而不是使用 被代理类对象
 
     @Test
     void testStaticProxy(){

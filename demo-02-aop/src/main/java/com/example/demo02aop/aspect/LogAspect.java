@@ -32,7 +32,7 @@ public class LogAspect {
      * */
 
     //参数带什么就切
-    @Before("args(int,int)")
+    @Before("args(int,int)")    //args这种对应的方法 在 execution对应的方法 之前就会执行
     public void haha(){
         System.out.println("【切面 - 日志】开始执行......方法执行前,hahah");
     }
