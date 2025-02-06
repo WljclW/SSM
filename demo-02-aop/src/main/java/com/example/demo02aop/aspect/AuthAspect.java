@@ -38,7 +38,7 @@ public class AuthAspect {
 
 
     /**
-     * 有返回值的下面方法是会在方法前执行的
+     * 有返回值的下面方法是会在方法前执行的，说明@Before注解的切面逻辑是可以有返回值的
      * */
     @Before("pointcut()")
     public int aut3h(){
@@ -47,7 +47,7 @@ public class AuthAspect {
     }
 
     /**
-     * 相同时间的打印顺序适合方法名相关的，方法名小的越先打印。。比如：“aut3h”<“aut4h”，"aut3h">”aut2h“
+     * 相同时间的打印顺序是跟方法名相关的，方法名小的越先打印。。比如：“aut3h”<“aut4h”，"aut3h">”aut2h“
      * */
     @Before("pointcut()")
     public void aut4h(){       //方法的返回值是void也能正常执行

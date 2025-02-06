@@ -39,6 +39,7 @@ public class AopAspect {
         }
         System.out.println("被代理的对象:"+ jp.getTarget());
         System.out.println("代理对象自己:"+ jp.getThis());
+//        System.out.println(jp.getTarget()== jp.getThis());  //这里判断是不相等的，但是上面打印的结果表面看起来是一样的
     }
 
 

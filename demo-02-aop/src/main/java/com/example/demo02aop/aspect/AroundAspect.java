@@ -53,7 +53,7 @@ import java.util.Arrays;
 @Aspect
 public class AroundAspect {
 
-    //添加方法和注解指明需要起作用的地方
+    //使用一个空方法，来声明 方法和注解需要起作用的地方
     @Pointcut("execution(int com.example.demo02aop.calculator.MathCalculator.*(int,int))")
     public void pointCut(){
 
