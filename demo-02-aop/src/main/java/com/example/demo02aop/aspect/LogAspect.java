@@ -27,6 +27,12 @@ public class LogAspect {
      * 4.通知方法的执行顺序
      *    1)正常情况下：前置通知(@Before)——方法执行——返回通知(@AfterReturning)——方法结束通知(@After)
      *    2)出现异常时：前置通知(@Before)——方法执行——返回通知(@AfterThrowing——方法结束通知(@After)
+     * 5.@Before、@After、@AfterReturning、@AfterThrowing这四个注解标注方法时，做一下说明：
+     *      （1）方法的修饰符无所谓————因为反射都可以访问;
+     *      （2）方法的返回值无所谓;
+     *      （3）可以拿到切入点的信息(形参添加参数JointPoint);
+     *      （4）@AfterReturning注解的方法还可以通过在注解中添加returning="ret"，通过这个属性可以拿到
+     *          目标方法(即被代理方法)的返回值，然后在方法的形参中使用变量ret接收返回值
      *
      * JoinPoint joinPoint:连接点中包含方法的信息
      * */

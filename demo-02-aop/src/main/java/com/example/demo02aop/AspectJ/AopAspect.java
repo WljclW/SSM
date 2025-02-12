@@ -71,6 +71,19 @@ public class AopAspect {
         return result;
     }
 
+    /**
+     * @AfterReturning：在"被代理方法"正常返回后执行
+     * 与其他注解不一样的是这个注解多一个returning属性，这个属性可以获取到被代理方法返回的结果，
+     * */
+    @AfterReturning(value = "declareJoinPointerExpression()",returning = "ret") //被代理方法的执行结果将用变量ret接收，需要在方法的形参写上这个变量并注意形参类型和返回值类型一致
+    public void afterReturningMethod(JoinPoint jp,Object ret){
+        System.out.println("@AfterReturning注解 的返回通知");
+        System.out.println("目标方法名为："+jp.getSignature().getName());
+        System.out.println("目标方法所属类的简单类名"+jp.getSignature().getDeclaringType().getSimpleName());
+        System.out.println("目标方法所属类的类名"+jp.getSignature().getDeclaringTypeName());
+    }
+
+
 
     @After("declareJoinPointerExpression()")
     public void afterMethod(){
