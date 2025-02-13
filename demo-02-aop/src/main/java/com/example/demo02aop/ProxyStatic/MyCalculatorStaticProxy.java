@@ -13,6 +13,10 @@ public class MyCalculatorStaticProxy implements MathCalculator {
 //    @Autowired
 //    private MyCalculator target;
 
+    /**
+     * 静态代理：朴素理解就是一种内部持有的关系。
+     * 这种思想在rocketmq的源码中常见，比如：DefaultProducerImpl类，里面持有DefaultMQProducer对象。。。
+     * */
     private MathCalculator target; //目标对象。用接口来声明字段
 
     public MyCalculatorStaticProxy(MathCalculator mc){
@@ -22,7 +26,7 @@ public class MyCalculatorStaticProxy implements MathCalculator {
     @Override
     public int add(int i, int j) {
         System.out.println("静态代理方法执行前的开始操作........");
-        int res = target.add(i,j);
+        int res = target.add(i,j);  //会调用被代理对象的同名方法
         System.out.println("静态代码在方法执行后的操作.........");
         return  res;
     }

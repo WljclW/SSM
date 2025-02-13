@@ -13,13 +13,15 @@ import java.util.Arrays;
 @Aspect     //必须加这个注解，告诉spring这是一个切面
 public class LogAspect {
     /**
-     * 1.需要在自己的类中来实现不同的切面逻辑；然后告诉spring何时何地去执行这些方法
-     * 2.何时？
+     * 1.需要在自己的类中通过方法来实现不同的切面逻辑；然后告诉spring何时何地去执行这些方法。。且要求切面类：
+     *      （1）类上注解@Aspect表明是切面类
+     *      （2）类上标注@Component让spring管理
+     * 2.何时 执行切面方法？通过以下注解指明
      *      @Before:方法执行之前执行该注解的方法
      *      @AfterReturning:方法正常执行 并且 返回之后 执行
      *      @AfterThrowing:方法执行时抛出异常时 执行此注解注解的方法
      *      @After:方法执行结束(正常结束和异常结束)都执行此注解的方法
-     * 3.何地？
+     * 3.何地 执行切面方法？通过写切入点表达式
      *      结果表达式。
      *      excute(方法的全签名)
      *          全签名的全写法比如：
@@ -34,7 +36,8 @@ public class LogAspect {
      *      （4）@AfterReturning注解的方法还可以通过在注解中添加returning="ret"，通过这个属性可以拿到
      *          目标方法(即被代理方法)的返回值，然后在方法的形参中使用变量ret接收返回值
      *
-     * JoinPoint joinPoint:连接点中包含方法的信息
+     * 6.JoinPoint joinPoint:连接点中包含方法的信息。。写在方法的形参中，方法就可以拿到切入点(被代理方法)的
+     *      相关信息了
      * */
 
     //参数带什么就切

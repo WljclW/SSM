@@ -19,7 +19,7 @@ public class DynamicProxy {
                     Object result = null;
                     System.out.println("日志"+method.getName()+"开始，参数是："+ Arrays.toString(args));
                     try {
-                        result = method.invoke(target, args);   //调用被代理类的方法
+                        result = method.invoke(target, args);   //调用被代理类的方法(被代理方法的返回值其实是int，但是也能代理成功)
                         System.out.println("方法正常返回"+method.getName()+"结果是："+result);
                     }catch (Exception e){
                         System.out.println("方法执行出现异常"+method.getName()+"出现异常"+e.getCause());
