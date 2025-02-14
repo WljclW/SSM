@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class AopTest {
+public class AopTest {  //aspect包的测试，这个包下的程序实现对"MathCalculator接口中所有方法"的切入逻辑
     @Autowired
     MyCalculator mathCalculator;
 

@@ -49,7 +49,7 @@ import java.util.Arrays;
  * 在测试阶段，通过AOP为方法调用添加模拟（mock）或桩（stub）对象，以便进行单元测试或集成测试。
  */
 
-@Component
+//@Component
 @Aspect
 public class AroundAspect {
 

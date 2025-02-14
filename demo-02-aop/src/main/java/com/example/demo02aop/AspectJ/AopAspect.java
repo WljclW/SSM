@@ -99,9 +99,10 @@ public class AopAspect {
 //        System.out.println("@AfterThrowing注解 的异常通知");
 //    }
 
-    @AfterThrowing("declareJoinPointerExpression()")
-    public void afterThrowingMethod(){
-        System.out.println("@AfterThrowing注解 的异常通知");
+    @AfterThrowing(value = "declareJoinPointerExpression()",
+                throwing = "e")
+    public void afterThrowingMethod(Exception e){
+        System.out.println("@AfterThrowing注解 的异常通知,且异常的原因是："+e.getMessage());
     }
 
 }

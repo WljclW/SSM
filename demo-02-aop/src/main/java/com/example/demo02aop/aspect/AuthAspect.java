@@ -3,9 +3,7 @@ package com.example.demo02aop.aspect;/**
  * @date 2025/2/6 14:27
  */
 
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,7 +15,8 @@ import org.springframework.stereotype.Component;
 public class AuthAspect {
 
     /**
-     * 定义一个切入点表达式，表述哪些方法需要被切
+     * 定义一个切入点表达式，表述哪些方法需要被切。
+     * 在需要这些切入点的时候，引用这个方法名即可
      * */
     @Pointcut("execution(int com.example.demo02aop.calculator.MathCalculator.*(..))")
     public void pointcut(){
@@ -42,7 +41,7 @@ public class AuthAspect {
      * */
     @Before("pointcut()")
     public int aut3h(){
-        System.out.println("aut3h-----------前置");
+        System.out.println("aut3h方法-----------前置");
         return 2;
     }
 
@@ -51,6 +50,16 @@ public class AuthAspect {
      * */
     @Before("pointcut()")
     public void aut4h(){       //方法的返回值是void也能正常执行
-        System.out.println("aut2h-----------前置");
+        System.out.println("aut4h方法-----------前置");
+    }
+
+    @After("pointcut()")
+    public void aut4hAfter(){
+        System.out.println("auth切面类-----------After后置");
+    }
+
+    @AfterReturning("pointcut()")
+    public void aut4hAftr(){
+        System.out.println("auth切面类-----------AfterReturning正常返回");
     }
 }

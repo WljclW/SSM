@@ -20,14 +20,17 @@ public class calculatorDamicProxy {
     @Autowired
     MyCalculator myCalculator;
 
+    /**
+     * 动态代理在使用的时候需要强转为被代理类接口的类型
+     * */
     @Test
     void testDynamic(){
         UserServiceImpl userService = new UserServiceImpl();
         UserService o = (UserService) DynamicProxy.newProxyInstance(userService);
         o.saveUser();
         System.out.println("==============测试dev方法的执行=================");
-        MathCalculator o1 = (MathCalculator)DynamicProxy.newProxyInstance(myCalculator);
-        o1.dev(10,0);
+        MathCalculator o1 = (MathCalculator)DynamicProxy.newProxyInstance(myCalculator); //代理对象转为接口类型
+        o1.dev(10,0);   //调用接口的方法
     }
 
 
