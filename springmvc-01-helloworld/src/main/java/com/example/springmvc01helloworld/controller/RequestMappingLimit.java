@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 测试请求限定，即在请求映射中添加一些额外的参数来实现
+ * 测试请求限定，即在请求映射中添加一些额外的参数来实现————即在@RequestMapping注解中添加一些参数！！
  *
  * 请求方式：
  *      GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
@@ -32,7 +32,7 @@ public class RequestMappingLimit {
      */
     @RequestMapping(value = "test02",params = {"key1","key2=18","gender!=1"})
     public String test03(){
-        return "要求：必须传键为key1，key2=18的参数,并且gender参数的值不能是1";
+        return "要求：必须传键为key1，key2=18的参数,并且gender参数的值不能是1(不传gender参数也是合法的)";
     }
 
 
@@ -43,7 +43,7 @@ public class RequestMappingLimit {
      */
     @RequestMapping(value = "/test04",headers = "haha")
     public String test04(){
-        return "要求：请求的参数中必须带有haha";
+        return "要求：请求头中的键值对必须带有haha这个键";
     }
 
 
@@ -58,7 +58,13 @@ public class RequestMappingLimit {
         return "要求：请求的数据类型必须是json";
     }
 
-    //要求服务端给浏览器返回的是纯文本信息
+
+    /**
+     * 对比一下下面的test06 和 test07，体现了produces的作用。。同样的数据浏览器展示的结果是不一样的：
+     *      test06中因为指定的produces是"text/plain"，因此会把字符串原样展示出来；
+     *      test07中因为指定的produces是"text/html"，因此会把字符串解析成html代码，浏览器展示的是解析html代码后的网页。
+     * */
+    /*要求服务端给浏览器返回的是纯文本信息*/
     @RequestMapping(value = "/test06",produces = "text/pain")
     public String test06(){
         return "<h1>你好，我是服务端返回的数据</h1>";
@@ -70,6 +76,6 @@ public class RequestMappingLimit {
     //返回的数据以html来进行解析
     @RequestMapping(value = "/test07",produces = "text/html")
     public String test07(){
-        return "<h1>你好，我是服务端返回的数据</h1>";
+        return "<h1>你好，我是服务端返回的数据</h1>";    /*表示返回的是一段html代码，因此浏览器收到后就会按照html的规范来解析*/
     }
 }
