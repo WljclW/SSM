@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(RobotAutoConfiguration.class) //在注解上继承此，导入自动配置类
+@Import(RobotAutoConfiguration.class) //导入自动配置类————在注解上做这个操作。
 public @interface EnableRobot {
 
 }

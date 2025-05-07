@@ -23,6 +23,7 @@ public class MyCalculatorStaticProxy implements MathCalculator {
         this.target = mc;
     }
 
+    /*静态代理方法内在执行被代理类方法前后添加逻辑*/
     @Override
     public int add(int i, int j) {
         System.out.println("静态代理方法执行前的开始操作........");
