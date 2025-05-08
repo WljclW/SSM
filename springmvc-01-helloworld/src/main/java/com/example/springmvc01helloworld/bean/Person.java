@@ -16,13 +16,13 @@ public class Person {
     private String password;
     private String cellphone;
     private boolean agreement;
-    private Adress adress;
+    private Address address;
     private String[] hobby;
 }
 
 
 @Data
-class Adress{
+class Address{
     private String province;
     private String city;
     private String area;
