@@ -1,0 +1,2 @@
+BizException 定义业务异常类
+BizExceptionEnume 业务异常的枚举类，声明所有的业务异常

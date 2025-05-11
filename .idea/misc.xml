@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/mybatis-01-helloword/pom.xml" />
         <option value="$PROJECT_DIR$/springboot-01-demo/pom.xml" />
         <option value="$PROJECT_DIR$/robot-spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/restful-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/apringmvc-best-practice/pom.xml" />
+        <option value="$PROJECT_DIR$/springmvc-restful-crud/pom.xml" />
       </list>
     </option>
   </component>

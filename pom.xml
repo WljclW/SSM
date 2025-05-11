@@ -22,6 +22,8 @@
         <module>mybatis-01-helloword</module>
         <module>springboot-01-demo</module>
         <module>spring-start-demo</module>
+        <module>springmvc-restful-crud</module>
+        <module>springmvc-02-best-practice</module>
     </modules>
 
 </project>
