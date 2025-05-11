@@ -72,7 +72,7 @@ public class calculatorDamicProxy {
         InvocationHandler ihx = (proxy,method,args)->{
             System.out.println("修改前的参数："+ Arrays.asList(args));
             System.out.println("动态代理在执行中。。。。。。。。。");
-            args[0] = 0;
+            args[0] = 0; //修改执行方法时传进来的参数
             System.out.println("修改后的参数："+Arrays.asList(args));
             System.out.println("原始方法执行前打印日志..........");
             method.invoke(myCalculator,args);   //执行 被代理类的方法

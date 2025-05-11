@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 public class MyCalculator implements MathCalculator {
     /**
      * 实现日志：
-     *      1. 硬编码：
+     *      1. 硬编码（直接在原始类修改）：
      *      2。静态代理：定义一个代理操作，包装这个组件。业务的执行从代理开始。
-     *          【特点】在编译期间就知道了明确的代理关系；
+     *          【特点】在 编译期间 就知道了明确的代理关系；
      *      3.动态代理：运行期间才决定好代理关系(拦截器，拦截所有)
      *          目标对象在执行期间会被拦截，插入指定逻辑
      *          优点：可以代理世间万物
