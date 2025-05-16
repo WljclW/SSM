@@ -47,7 +47,7 @@ public class HelloController {
     @GetMapping("/helloo")
     public R helloo(@RequestParam(value = "i",defaultValue = "0")Integer integer) throws FileNotFoundException {
         int j = 10/integer;
-        FileInputStream inputStream = new FileInputStream("D:\\123.txt");
+//        FileInputStream inputStream = new FileInputStream("D:\\123.txt");
         return R.ok(j);
     }
 
